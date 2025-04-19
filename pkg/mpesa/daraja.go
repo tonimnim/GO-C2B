@@ -1,4 +1,4 @@
-package goc2b
+package mpesa
 
 import (
 	"time"
@@ -46,6 +46,7 @@ type Daraja struct {
 	ConsumerSecret string
 }
 
+// DarajaAPI defines the interface for M-Pesa API operations
 type DarajaAPI interface {
 	Authorize() (*Authorization, error)
 	ReverseTransaction(transaction ReversePayload) (*ReversalResponse, *ErrorResponse)

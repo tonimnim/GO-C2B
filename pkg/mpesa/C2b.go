@@ -1,4 +1,4 @@
-package goc2b
+package mpesa
 
 import (
 	"encoding/base64"
@@ -76,6 +76,14 @@ func (d *Daraja) MakeSTKPushRequest(mpesaConfig LipaNaMpesaPayload) (*LipaNaMpes
 	mpesaConfig.Password = password
 
 	secureResponse, err := performSecurePostRequest[LipaNaMpesaResponse](mpesaConfig, endpointLipaNaMpesa, d)
+	if err != nil {
+		return nil, err
+	}
+	return &secureResponse.Body, nil
+}
+
+func (d *Daraja) MakeC2BPaymentV2(c2b C2BPayload) (*C2BResponse, *ErrorResponse) {
+	secureResponse, err := performSecurePostRequest[C2BResponse](c2b, endpointC2B, d)
 	if err != nil {
 		return nil, err
 	}

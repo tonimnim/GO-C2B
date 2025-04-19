@@ -1,4 +1,4 @@
-package goc2b
+package mpesa
 
 type ReversePayload struct {
 	Initiator              string `json:"Initiator"`
@@ -20,17 +20,10 @@ type ReversalResponse struct {
 	ResponseDescription      string `json:"ResponseDescription"`
 }
 
-func (d *Daraja) ReverseTransaction(transaction ReversePayload, certPath string) (*ReversalResponse, *ErrorResponse) {
-	transaction.CommandID = "TransactionReversal"
-	encryptedCredential, err := openSSlEncrypt(transaction.PassKey, certPath)
+func (d *Daraja) ReverseTransaction(transaction ReversePayload) (*ReversalResponse, *ErrorResponse) {
+	secureResponse, err := performSecurePostRequest[ReversalResponse](transaction, endpointReversal, d)
 	if err != nil {
-		return nil, &ErrorResponse{Err: err}
+		return nil, err
 	}
-	transaction.PassKey = encryptedCredential
-
-	secureResponse, errRes := performSecurePostRequest[*ReversalResponse](transaction, endpointReversal, d)
-	if errRes != nil {
-		return nil, errRes
-	}
-	return secureResponse.Body, nil
+	return &secureResponse.Body, nil
 }

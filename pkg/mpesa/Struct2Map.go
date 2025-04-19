@@ -1,4 +1,4 @@
-package goc2b
+package mpesa
 
 import "reflect"
 

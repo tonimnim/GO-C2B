@@ -1,4 +1,4 @@
-package goc2b
+package mpesa
 
 const (
 	baseUrlSandbox                    = "https://sandbox.safaricom.co.ke"
@@ -11,4 +11,5 @@ const (
 	endpointAccountBalance            = "/mpesa/accountbalance/v1/query"                   // The endpoint for querying an M-Pesa account balance
 	endpointRegisterConfirmValidation = "/mpesa/c2b/v1/registerurl"                        // The endpoint for confirming a C2BSimulation transaction
 	endpointLipaNaMpesa               = "/mpesa/stkpush/v1/processrequest"                 // The endpoint for initiating a Lipa Na Mpesa transaction
+	endpointC2B                       = "/mpesa/c2b/v1/simulate"                           // The endpoint for simulating a C2B transaction
 )
